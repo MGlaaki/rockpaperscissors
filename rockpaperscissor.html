@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<body>
+
+  <script>
+    function computerPlay(){
+      index = Math.floor((Math.random() * 3))
+      return ["rock", "paper", "scissors"][index] ;
+    }
+
+    function playRound(playerSelection, computerSelection){
+
+      console.log([playerSelection,computerSelection]) ;
+
+
+      if (playerSelection == computerSelection) return "Thats a draw !" ;
+
+      var win = false ;
+
+      if (playerSelection == "rock" && computerSelection == "paper") win = false ;
+      if (playerSelection == "rock" && computerSelection == "scissors") win = true ;
+      if (playerSelection == "paper" && computerSelection == "rock") win = true ;
+      if (playerSelection == "paper" && computerSelection == "scissors") win = false ;
+      if (playerSelection == "scissors" && computerSelection == "rock") win = false ;
+      if (playerSelection == "scissors" && computerSelection == "paper") win = true ;
+
+
+      return win ?
+        "You win ! " + playerSelection + " beats " + computerSelection :
+        "You lose ! " + computerSelection + " beats " + playerSelection ;
+    }
+
+    function playerSelection(){
+    var playerSelection = "z"
+
+    console.log(["p", "r", "s"].indexOf(playerSelection[0])) ;
+    while (["p", "r", "s"].indexOf(playerSelection[0]) != 0){
+      var playerSelection = prompt("quoi que tu joues ?\n> ").toLowerCase() ;
+      if (playerSelection[0] == "p") playerSelection = "paper" ;
+      if (playerSelection[0] == "r") playerSelection = "rock" ;
+      if (playerSelection[0] == "s") playerSelection = "scissors" ;
+    }
+
+    return playerSelection ;
+    }
+
+    function game(){
+      var win = 0 ;
+      var lose = 0 ;
+
+      for (i = 0 ; i<5 ; i++){
+        var round = playRound(playerSelection(), computerPlay()) ;
+        console.log(round);
+        if (/win/.test(round)) win++;
+        if (/lose/.test(round)) lose++;
+      }
+
+      if (win == lose) return "draw";
+      return (win > lose) ? "win" : "lose" ;
+
+    }
+
+    console.log(game()) ;
+
+
+
+  </script>
+</body>
